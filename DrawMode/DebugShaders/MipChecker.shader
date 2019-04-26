@@ -26,6 +26,7 @@ Shader "CustomDebug/MipCheckerboard"
             };
 
             sampler2D _MainTex;
+			float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
             float MipFactor = 0.0;
             float _Density;
@@ -37,6 +38,7 @@ Shader "CustomDebug/MipCheckerboard"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(pos);
                 o.uv = uv * _Density / MipFactor;
+				o.uv = TRANSFORM_TEX(o.uv, _MainTex);
                 return o;
             }
             
